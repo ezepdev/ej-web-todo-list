@@ -1,0 +1,45 @@
+{
+  "name": "ej-web-todo-list",
+  "version": "1.0.0",
+  "license": "ISC",
+  "author": "Leandro Di Lorenzo <leandro.jdl@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unq-ui/ej-web-todo-list.git"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src --ext .js && eslint src --ext .jsx"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "octicons": "^8.5.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-scripts": "3.4.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "18.0.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
