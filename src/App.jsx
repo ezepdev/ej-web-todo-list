@@ -22,8 +22,8 @@ const initialNotes = [
 const App = () => {
   const [list, setList] = useState(initialNotes);
 
-  const editElemList = (index, newTitle, newText) => {
-    setList((prevState) => prevState.map((note, i) => (i === index ? { title: newTitle, text: newText } : note)));
+  const editElemList = (index, title, text) => {
+    setList((prevState) => prevState.map((note, i) => (i === index ? { title, text } : note)));
   };
 
   const deleteElemList = (index) => {

@@ -21,6 +21,7 @@ const HeaderTodo = (props) => (
 
 const HeaderTodoActions = (props) => (
   <div className="dropdown">
+    {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
     <button className="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
     <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
       <button className="dropdown-item" type="button" onClick={() => props.edit(props.index)}>Edit</button>
