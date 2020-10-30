@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ListTODO.css';
 import AddTodo from './AddTODO';
 
@@ -29,60 +29,46 @@ const HeaderTodoActions = (props) => (
   </div>
 );
 
-export default class ListTODO extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentSelected: null,
-    };
-  }
+const ListTODO = (props) => {
+  const [currentSelected, setCurrentSelected] = useState(null);
 
-  edit = (index) => {
-    this.setState({ currentSelected: index });
-  }
+  const edit = (index) => setCurrentSelected(index);
+  const deleteNote = (index) => props.deleteElemList(index);
 
-  delete = (index) => {
-    this.props.deleteElemList(index);
-  }
+  const renderEditElem = (index, title, text) => (
+    <AddTodo
+      addElemList={(newTitle, newText) => {
+        props.editElemList(index, newTitle, newText);
+        setCurrentSelected(null);
+      }}
+      title={title}
+      text={text}
+    />
+  );
 
-  renderEditElem = (index, title, text) => {
-    return (
-      <AddTodo
-        addElemList={(newTitle, newText) => {
-          this.props.editElemList(index, newTitle, newText);
-          this.setState({ currentSelected: null });
-        }}
-        title={title}
-        text={text}
-      />
-    );
-  }
-
-  renderElem(index, title, text) {
-    return (
-      <div key={index} className={index === 0 ? 'list-group-item borderList first' : 'list-group-item borderList'}>
-        <div className="row">
-          <UserImageTodo />
-          <div className="col-11">
-            <HeaderTodo index={index} edit={this.edit} delete={this.delete} />
-            <h2>{title}</h2>
-            <p>{text}</p>
-          </div>
+  const renderElem = (index, title, text) => (
+    <div key={index} className={index === 0 ? 'list-group-item borderList first' : 'list-group-item borderList'}>
+      <div className="row">
+        <UserImageTodo />
+        <div className="col-11">
+          <HeaderTodo index={index} edit={edit} delete={deleteNote} />
+          <h2>{title}</h2>
+          <p>{text}</p>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 
-  render() {
-    return (
-      <div className="list-group">
-        {this.props.elems.map((elem, index) => {
-          if (this.state.currentSelected === index) {
-            return this.renderEditElem(index, elem.title, elem.text);
-          }
-          return this.renderElem(index, elem.title, elem.text);
-        })}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="list-group">
+      {props.elems.map((elem, index) => {
+        if (currentSelected === index) {
+          return renderEditElem(index, elem.title, elem.text);
+        }
+        return renderElem(index, elem.title, elem.text);
+      })}
+    </div>
+  );
+};
+
+export default ListTODO;

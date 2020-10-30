@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Navbar from './Navbar';
 import AddTODO from './AddTODO';
@@ -19,41 +19,34 @@ const initialNotes = [
   },
 ];
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { list: initialNotes };
-  }
+const App = () => {
+  const [list, setList] = useState(initialNotes);
 
-  editElemList = (index, newTitle, newText) => {
-    this.setState((prevState) => ({
-      list: prevState.list.map((text, i) => (i === index ? { title: newTitle, text: newText } : text)),
-    }));
-  }
+  const editElemList = (index, newTitle, newText) => {
+    setList((prevState) => prevState.map((note, i) => (i === index ? { title: newTitle, text: newText } : note)));
+  };
 
-  deleteElemList = (index) => {
-    this.setState((prevState) => ({
-      list: prevState.list.filter((text, i) => i !== index),
-    }));
-  }
+  const deleteElemList = (index) => {
+    setList((prevState) => prevState.filter((_, i) => i !== index));
+  };
 
-  addElemList = (title, text) => {
-    this.setState((prevState) => ({ list: [{ title, text }, ...prevState.list] }));
-  }
+  const addElemList = (title, text) => {
+    setList((prevState) => [{ title, text }, ...prevState]);
+  };
 
-  render() {
-    return (
-      <div>
-        <Navbar />
-        <div className="container">
-          <AddTODO addElemList={this.addElemList} />
-          <ListTODO
-            elems={this.state.list}
-            editElemList={this.editElemList}
-            deleteElemList={this.deleteElemList}
-          />
-        </div>
+  return (
+    <div>
+      <Navbar />
+      <div className="container">
+        <AddTODO addElemList={addElemList} />
+        <ListTODO
+          elems={list}
+          editElemList={editElemList}
+          deleteElemList={deleteElemList}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default App;
