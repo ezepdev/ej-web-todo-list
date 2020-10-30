@@ -8,7 +8,7 @@ const UserImageTodo = () => (
   </div>
 );
 
-const HeaderTodo = props => (
+const HeaderTodo = (props) => (
   <div className="row">
     <div className="col-11">
       <h6>UserName - Time</h6>
@@ -19,7 +19,7 @@ const HeaderTodo = props => (
   </div>
 );
 
-const HeaderTodoActions = props => (
+const HeaderTodoActions = (props) => (
   <div className="dropdown">
     <button className="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
     <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -35,37 +35,37 @@ export default class ListTODO extends React.Component {
     this.state = {
       currentSelected: null,
     };
-    this.edit = this.edit.bind(this);
-    this.delete = this.delete.bind(this);
   }
 
-  edit(index) {
+  edit = (index) => {
     this.setState({ currentSelected: index });
   }
 
-  delete(index) {
+  delete = (index) => {
     this.props.deleteElemList(index);
   }
 
-  renderEditElem(index, text) {
+  renderEditElem = (index, title, text) => {
     return (
       <AddTodo
-        addElemList={(newText) => {
-          this.props.editElemList(index, newText);
+        addElemList={(newTitle, newText) => {
+          this.props.editElemList(index, newTitle, newText);
           this.setState({ currentSelected: null });
         }}
+        title={title}
         text={text}
       />
     );
   }
 
-  renderElem(index, text) {
+  renderElem(index, title, text) {
     return (
       <div key={index} className={index === 0 ? 'list-group-item borderList first' : 'list-group-item borderList'}>
         <div className="row">
           <UserImageTodo />
           <div className="col-11">
             <HeaderTodo index={index} edit={this.edit} delete={this.delete} />
+            <h2>{title}</h2>
             <p>{text}</p>
           </div>
         </div>
@@ -78,9 +78,9 @@ export default class ListTODO extends React.Component {
       <div className="list-group">
         {this.props.elems.map((elem, index) => {
           if (this.state.currentSelected === index) {
-            return this.renderEditElem(index, elem.text);
+            return this.renderEditElem(index, elem.title, elem.text);
           }
-          return this.renderElem(index, elem.text);
+          return this.renderElem(index, elem.title, elem.text);
         })}
       </div>
     );

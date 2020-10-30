@@ -4,42 +4,41 @@ import Navbar from './Navbar';
 import AddTODO from './AddTODO';
 import ListTODO from './ListTODO';
 
+const initialNotes = [
+  {
+    title: 'Note1',
+    text: 'Pasando a la década de 1960, el Lorem Ipsum fue popularizado por el fabricante de tipografía Letraset, que lo utilizó en sus campañas publicitarias.Letraset ofrecía páginas de Lorem Ipsum como hojas de transferencia, que fueron ampliamente utilizadas en la era anterior a los ordenadores para los diseños.Estas páginas de transferencia, conocidas como Letraset Body Type, se incluyeron en la publicidad de la compañía y en su popular catálogo.',
+  },
+  {
+    title: 'Note2',
+    text: 'Pasando a la década de 1960, el Lorem Ipsum fue popularizado por el fabricante de tipografía Letraset, que lo utilizó en sus campañas publicitarias.Letraset ofrecía páginas de Lorem Ipsum como hojas de transferencia, que fueron ampliamente utilizadas en la era anterior a los ordenadores para los diseños.Estas páginas de transferencia, conocidas como Letraset Body Type, se incluyeron en la publicidad de la compañía y en su popular catálogo.',
+  },
+  {
+    title: 'Note3',
+    text: 'Pasando a la década de 1960, el Lorem Ipsum fue popularizado por el fabricante de tipografía Letraset, que lo utilizó en sus campañas publicitarias.Letraset ofrecía páginas de Lorem Ipsum como hojas de transferencia, que fueron ampliamente utilizadas en la era anterior a los ordenadores para los diseños.Estas páginas de transferencia, conocidas como Letraset Body Type, se incluyeron en la publicidad de la compañía y en su popular catálogo.',
+  },
+];
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      list: [
-        {
-          text: 'Pasando a la década de 1960, el Lorem Ipsum fue popularizado por el fabricante de tipografía Letraset, que lo utilizó en sus campañas publicitarias.Letraset ofrecía páginas de Lorem Ipsum como hojas de transferencia, que fueron ampliamente utilizadas en la era anterior a los ordenadores para los diseños.Estas páginas de transferencia, conocidas como Letraset Body Type, se incluyeron en la publicidad de la compañía y en su popular catálogo.',
-        },
-        {
-          text: 'Pasando a la década de 1960, el Lorem Ipsum fue popularizado por el fabricante de tipografía Letraset, que lo utilizó en sus campañas publicitarias.Letraset ofrecía páginas de Lorem Ipsum como hojas de transferencia, que fueron ampliamente utilizadas en la era anterior a los ordenadores para los diseños.Estas páginas de transferencia, conocidas como Letraset Body Type, se incluyeron en la publicidad de la compañía y en su popular catálogo.',
-        },
-        {
-          text: 'Pasando a la década de 1960, el Lorem Ipsum fue popularizado por el fabricante de tipografía Letraset, que lo utilizó en sus campañas publicitarias.Letraset ofrecía páginas de Lorem Ipsum como hojas de transferencia, que fueron ampliamente utilizadas en la era anterior a los ordenadores para los diseños.Estas páginas de transferencia, conocidas como Letraset Body Type, se incluyeron en la publicidad de la compañía y en su popular catálogo.',
-        },
-      ],
-    };
-
-    this.deleteElemList = this.deleteElemList.bind(this);
-    this.editElemList = this.editElemList.bind(this);
-    this.addElemList = this.addElemList.bind(this);
+    this.state = { list: initialNotes };
   }
 
-  editElemList(index, newText) {
-    this.setState(prevState => ({
-      list: prevState.list.map((text, i) => (i === index ? { text: newText } : text)),
+  editElemList = (index, newTitle, newText) => {
+    this.setState((prevState) => ({
+      list: prevState.list.map((text, i) => (i === index ? { title: newTitle, text: newText } : text)),
     }));
   }
 
-  deleteElemList(index) {
-    this.setState(prevState => ({
+  deleteElemList = (index) => {
+    this.setState((prevState) => ({
       list: prevState.list.filter((text, i) => i !== index),
     }));
   }
 
-  addElemList(text) {
-    this.setState(prevState => ({ list: [...prevState.list, { text }] }));
+  addElemList = (title, text) => {
+    this.setState((prevState) => ({ list: [{ title, text }, ...prevState.list] }));
   }
 
   render() {

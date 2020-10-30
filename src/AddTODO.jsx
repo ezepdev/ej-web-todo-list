@@ -5,19 +5,22 @@ export default class AddTodo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: this.props.title || '',
       text: this.props.text || '',
     };
-    this.changeText = this.changeText.bind(this);
-    this.addElement = this.addElement.bind(this);
   }
 
-  addElement() {
-    this.props.addElemList(this.state.text);
-    this.setState({ text: '' });
+  addElement = () => {
+    this.props.addElemList(this.state.title, this.state.text);
+    this.setState({ title: '', text: '' });
   }
 
-  changeText(event) {
+  changeText = (event) => {
     this.setState({ text: event.target.value });
+  }
+
+  changeTitle = (event) => {
+    this.setState({ title: event.target.value });
   }
 
   render() {
@@ -28,7 +31,8 @@ export default class AddTodo extends React.Component {
             <img className="rounded-circle small" src="https://pbs.twimg.com/profile_images/1064465168179085313/YgDr84RZ_bigger.jpg" alt="" />
           </div>
           <div className="col-11">
-            <textarea value={this.state.text} onChange={this.changeText} className="form-control" aria-label="With textarea" />
+            <input value={this.state.title} onChange={this.changeTitle} className="form-control mb-2" placeholder="Title" />
+            <textarea value={this.state.text} onChange={this.changeText} className="form-control" aria-label="With textarea" placeholder="Text" />
           </div>
         </div>
         <div className="buttonContainer text-right">
