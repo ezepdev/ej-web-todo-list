@@ -15,10 +15,12 @@
     "lint": "eslint src --ext .js && eslint src --ext .jsx"
   },
   "dependencies": {
-    "bootstrap": "^4.4.1",
+    "axios": "^0.21.0",
+    "bootstrap": "^4.5.3",
     "octicons": "^8.5.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.0"
   },
   "devDependencies": {
